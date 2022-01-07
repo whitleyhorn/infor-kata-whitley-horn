@@ -20,4 +20,9 @@ body {
     position: fixed;
     /* Allow clicks to fall through to elements behind it */
     pointer-events: none;
+    transition: opacity 0.25s;
+}
+
+.transparent {
+    opacity:0;
 }

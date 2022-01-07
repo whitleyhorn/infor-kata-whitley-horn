@@ -1,7 +1,7 @@
 // insert message js
 const dialogTemplate = document.createElement('template');
 dialogTemplate.innerHTML = `
-    <div class="wrapper hide">
+    <div class="wrapper transparent hide">
        <div class="modalContent">
             <div class="header">
                 <img src="images/error-alert.svg">
@@ -28,6 +28,7 @@ dialogSheet.replaceSync(`
         position: absolute;
         width: 100%;
         top: 0;
+        transition: opacity .25s;
     }
 
     .modalContent {
@@ -72,6 +73,10 @@ dialogSheet.replaceSync(`
     .hide {
         display: none;
     }
+
+    .transparent {
+        opacity:0;
+    }
 `);
 
 class CustomMessageDialog extends HTMLElement {
@@ -81,7 +86,7 @@ class CustomMessageDialog extends HTMLElement {
         this.shadowRoot.adoptedStyleSheets = [dialogSheet];
 		this.shadowRoot.appendChild(dialogTemplate.content.cloneNode(true));
 	}
-    
+
     get wrapper(){
         return this.shadowRoot.querySelector('div.wrapper');
     }
@@ -89,11 +94,37 @@ class CustomMessageDialog extends HTMLElement {
     show(){
         this.wrapper.classList.remove('hide');
         document.querySelector('.overlay').classList.remove('hide');
+        // Without the 1ms delay, the transition property doesn't work
+        // To see what I mean, replace following line with: 
+        // fadeInOverlay();
+        // setTimeout(fadeInDialog.bind(this), 250);
+        
+        Promise.delay(fadeInOverlay, 1).delay(fadeInDialog.bind(this), 250);
+
+        // ***
+        function fadeInDialog(){
+            this.wrapper.classList.remove('transparent');
+        }
+
+        function fadeInOverlay(){
+            document.querySelector('.overlay').classList.remove('transparent'); 
+        }
     }
 
     hide(){
-        this.wrapper.classList.add('hide');
-        document.querySelector('.overlay').classList.add('hide');
+        
+        this.wrapper.classList.add('transparent'); // fade out dialog
+        Promise.delay(fadeOutOverlay, 250).delay(hideElems.bind(this), 250);
+
+        // ***
+        function fadeOutOverlay(){
+            document.querySelector('.overlay').classList.add('transparent'); 
+        }
+
+        function hideElems(){
+            this.wrapper.classList.add('hide');
+            document.querySelector('.overlay').classList.add('hide');
+        }
     }
 
     connectedCallback(){
