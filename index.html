@@ -3,19 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <title>Message Dialog Code Kata</title>
-  <meta http-equiv="Content-Security-Policy"
+  
+ <!-- <meta http-equiv="Content-Security-Policy"
   content="
     script-src 'self';
     style-src 'self' https://fonts.googleapis.com 'nonce-0a59a005';
     font-src 'self' data: https://fonts.gstatic.com;
   "/>
+ -->
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600&amp;display=swap" rel="stylesheet"/>
+  <!-- Style sheet doesn't seem necessary at this point -->
+  <style>
+    .container {
+        max-width: 1280px;
+        margin: 2rem auto 0;
+        height: 100vh;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .overlay {
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+        opacity: 0.7;
+        position: absolute;
+        margin-top: -32px;
+        /* Allow clicks to fall through to elements behind it */
+        pointer-events: none;
+    }
+  </style>
 </head>
 <body>
   <!-- Insert Custom Component Html -->
-  <script defer="" src="../css/custom-button.js"></script>
-  <script defer="" src="../css/custom-message.js"></script>
+  <div class="overlay hide"></div>
+  <custom-message-dialog id='myCustomMsgDialog'></custom-message-dialog> 
+
+  <div class="container">
+      <custom-button id='myCustomBtn' text='Error Example'></custom-button>
+  </div>
+
+  <script defer="" src="js/custom-button.js"></script>
+  <script defer="" src="js/custom-message-dialog.js"></script>
+  <script>
+      myCustomBtn.addEventListener('clicked', function showDialog(e){
+          myCustomMsgDialog.show();
+      }) 
+
+      document.addEventListener('keydown', function(evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 27) {
+            // Escape Key Pressed
+            myCustomMsgDialog.hide();
+        }
+      })
+  </script>
 </body>
 </html>
 
