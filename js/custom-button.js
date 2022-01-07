@@ -25,7 +25,6 @@ class CustomButton extends HTMLElement {
 		super();
 		this.attachShadow({ mode: 'open'});
 		this.shadowRoot.appendChild(buttonTemplate.content.cloneNode(true));
-        this.button.innerText = this.getAttribute('text');
 	}
 
     get button(){
@@ -33,6 +32,7 @@ class CustomButton extends HTMLElement {
     }
 
     connectedCallback(){
+        this.button.innerText = this.getAttribute('text');
         const clickEvent = new CustomEvent('clicked');
         const dispatch = this.dispatchEvent.bind(this, clickEvent);
         this.button.addEventListener('click', dispatch);
