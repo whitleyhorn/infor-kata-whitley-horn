@@ -29,6 +29,7 @@ dialogSheet.replaceSync(`
         margin: 0 auto;
         position: absolute;
         width: 100%;
+        top: 0;
     }
 
     .modal {
