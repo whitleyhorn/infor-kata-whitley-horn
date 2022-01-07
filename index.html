@@ -4,13 +4,12 @@
   <meta charset="utf-8" />
   <title>Message Dialog Code Kata</title>
   
- <!-- <meta http-equiv="Content-Security-Policy"
+ <meta http-equiv="Content-Security-Policy"
   content="
     script-src 'self';
     style-src 'self' https://fonts.googleapis.com 'nonce-0a59a005';
     font-src 'self' data: https://fonts.gstatic.com;
   "/>
- -->
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600&amp;display=swap" rel="stylesheet"/>
   <link href="styles/index.css" rel="stylesheet"/>
@@ -18,27 +17,15 @@
 <body>
   <!-- Insert Custom Component Html -->
   <div class="overlay hide"></div>
-  <custom-message-dialog id='myCustomMsgDialog'></custom-message-dialog> 
 
   <div class="container">
       <custom-button id='myCustomBtn' text='Error Example'></custom-button>
+      <custom-message-dialog id='myCustomMsgDialog'></custom-message-dialog> 
   </div>
 
   <script defer="" src="js/custom-button.js"></script>
   <script defer="" src="js/custom-message-dialog.js"></script>
-  <script>
-      myCustomBtn.addEventListener('clicked', function showDialog(e){
-          myCustomMsgDialog.show();
-      }) 
-
-      document.addEventListener('keydown', function hideDialog(e) {
-        e = e || window.event;
-        if (e.keyCode == 27) {
-            // Escape Key Pressed
-            myCustomMsgDialog.hide();
-        }
-      })
-  </script>
+  <script defer="" src="js/index.js"></script>
 </body>
 </html>
 
