@@ -78,7 +78,6 @@ class CustomMessageDialog extends HTMLElement {
 	}
     
     get wrapper(){
-        // First div selected will be outer div, always
         return this.shadowRoot.querySelector('div.wrapper');
     }
 
