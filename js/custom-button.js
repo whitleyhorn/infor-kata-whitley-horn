@@ -39,9 +39,6 @@ class CustomButton extends HTMLElement {
 
     connectedCallback(){
         this.button.innerText = this.getAttribute('text');
-        const clickEvent = new CustomEvent('clicked');
-        const dispatch = this.dispatchEvent.bind(this, clickEvent);
-        this.button.addEventListener('click', dispatch);
     }
 }
 

@@ -1,4 +1,4 @@
-myCustomBtn.addEventListener('clicked', function showDialog(e){
+myCustomBtn.addEventListener('click', function showDialog(e){
   myCustomMsgDialog.show();
 }) 
 
